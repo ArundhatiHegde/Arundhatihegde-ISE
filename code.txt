@@ -1,0 +1,66 @@
+import sys;
+
+def minDiff(di, n, m):
+ 
+    # if there are no goodies or number
+    # of employees is 0
+    if (m==0 or n==0):
+        return 0
+    a=[]
+    b=[]
+    # Sort the given goodies
+    p={k: v for k, v in sorted(di.items(), key=lambda item: item[1])}
+    for k,v in p.items():
+        a.append(k)
+        b.append(v)
+     
+    # Number of goodies cannot be more than
+    # number of employees
+    if (n < m):
+        return -1
+   
+        
+    min_diff = sys.maxsize
+    
+    i=0
+    while(i+m-1<n ):
+      
+        diff = b[i+m-1] - b[i]
+        if (diff < min_diff):
+            min_diff = diff
+         
+        i+=1
+         
+    return min_diff
+ 
+if __name__ == "__main__":
+    d ={'Fitbit Plus' : 7980, 'IPods': 22349, 'MI Band': 999,'Cult Pass' : 2799, 'Macbook Pro' : 229900,
+          'Digital Camera': 11101,'Alexa' : 9999 , 'Sandwich Toaster': 2195,'Microwave Oven': 9800, 'Scale': 4999 }
+    m = int(input("No of Employees: "))
+    n = len(d)
+    
+    print("And the difference between the chosen goodie with highest price and the lowest price is", minDiff(d, n, m))
+Output:
+TestCase1:
+No of Employees: 4
+Fitbit Plus: 7980
+Microwave Oven: 9800
+Alexa: 9999
+Digital Camera: 11101
+And the difference between the chosen goodie with highest price and the lowest price is 3121
+
+TestCase 2:
+No of Employees: 6
+Sandwich Toaster: 2195
+Cult Pass: 2799
+Scale: 4999
+Fitbit Plus: 7980
+Microwave Oven: 9800
+Alexa: 9999
+And the difference between the chosen goodie with highest price and the lowest price is 7804
+
+TestCase 3:
+No of Employees: 2
+Microwave Oven: 9800
+Alexa: 9999
+And the difference between the chosen goodie with highest price and the lowest price is 199
